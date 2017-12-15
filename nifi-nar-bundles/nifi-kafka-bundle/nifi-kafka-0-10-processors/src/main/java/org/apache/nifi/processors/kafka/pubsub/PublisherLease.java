@@ -75,10 +75,7 @@ public class PublisherLease implements Closeable {
             byte[] messageContent;
             try {
                 while ((messageContent = demarcator.nextToken()) != null) {
-                    // We do not want to use any key if we have a demarcator because that would result in
-                    // the key being the same for multiple messages
-                    final byte[] keyToUse = demarcatorBytes == null ? messageKey : null;
-                    publish(flowFile, keyToUse, messageContent, topic, tracker);
+                    publish(flowFile, messageKey, messageContent, topic, tracker);
 
                     if (tracker.isFailed(flowFile)) {
                         // If we have a failure, don't try to send anything else.
@@ -106,13 +103,15 @@ public class PublisherLease implements Closeable {
         Record record;
         int recordCount = 0;
 
-        try (final RecordSetWriter writer = writerFactory.createWriter(logger, schema, baos)) {
+        try {
             while ((record = recordSet.next()) != null) {
                 recordCount++;
                 baos.reset();
 
-                writer.write(record);
-                writer.flush();
+                try (final RecordSetWriter writer = writerFactory.createWriter(logger, schema, baos)) {
+                    writer.write(record);
+                    writer.flush();
+                }
 
                 final byte[] messageContent = baos.toByteArray();
                 final String key = messageKeyField == null ? null : record.getAsString(messageKeyField);
