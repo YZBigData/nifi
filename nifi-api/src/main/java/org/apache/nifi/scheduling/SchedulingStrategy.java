@@ -63,7 +63,7 @@ public enum SchedulingStrategy {
      * Indicates that the component will be scheduled via timer only on the
      * Primary Node. If the instance is not part of a cluster and this
      * Scheduling Strategy is used, the component will be scheduled in the same
-     * manner as if {@link TIMER_DRIVEN} were used.
+     * manner as if {@link this#TIMER_DRIVEN} were used.
      */
     @Deprecated
     PRIMARY_NODE_ONLY(1, "0 sec"),

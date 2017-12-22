@@ -27,7 +27,7 @@ import org.apache.nifi.logging.LogLevel;
 
 /**
  * <p>
- * Marker interface that a Processor can use to configure the yield duration, the  penalty duration and the bulletin log level.
+ * Marker interface that a Processor can use to configure the yield duration, the penalty duration and the bulletin log level.
  * Note that the number of Concurrent tasks will be ignored if the annotation @TriggerSerialy is used
  * </p>
  */

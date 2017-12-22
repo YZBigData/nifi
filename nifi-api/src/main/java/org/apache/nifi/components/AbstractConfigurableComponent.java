@@ -57,7 +57,6 @@ public abstract class AbstractConfigurableComponent implements ConfigurableCompo
     }
 
     private PropertyDescriptor getPropertyDescriptor(final PropertyDescriptor specDescriptor) {
-        PropertyDescriptor descriptor = null;
         //check if property supported
         final List<PropertyDescriptor> supportedDescriptors = getSupportedPropertyDescriptors();
         if (supportedDescriptors != null) {
@@ -68,7 +67,7 @@ public abstract class AbstractConfigurableComponent implements ConfigurableCompo
             }
         }
 
-        descriptor = getSupportedDynamicPropertyDescriptor(specDescriptor.getName());
+        PropertyDescriptor descriptor = getSupportedDynamicPropertyDescriptor(specDescriptor.getName());
         if (descriptor != null && !descriptor.isDynamic()) {
             descriptor = new PropertyDescriptor.Builder().fromPropertyDescriptor(descriptor).dynamic(true).build();
         }

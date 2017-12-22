@@ -30,7 +30,9 @@ import org.apache.nifi.registry.VariableRegistry;
 public interface AttributeExpression {
 
     /**
-     * @return Evaluates the expression without any additional attributes.
+     * Evaluates the expression without any additional attributes.
+     *
+     * @return evaluated value
      * @throws ProcessException if unable to evaluate
      */
     String evaluate() throws ProcessException;

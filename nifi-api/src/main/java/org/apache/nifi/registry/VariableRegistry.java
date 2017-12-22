@@ -42,19 +42,19 @@ public interface VariableRegistry {
         final Map<VariableDescriptor, String> map = new HashMap<>();
 
         {
-            System.getenv().entrySet().stream().forEach((entry) -> {
-                final VariableDescriptor desc = new VariableDescriptor.Builder(entry.getKey())
+            System.getenv().forEach((key, value) -> {
+                final VariableDescriptor desc = new VariableDescriptor.Builder(key)
                         .description("Env Var")
                         .sensitive(false)
                         .build();
-                map.put(desc, entry.getValue());
+                map.put(desc, value);
             });
-            System.getProperties().entrySet().stream().forEach((entry) -> {
-                final VariableDescriptor desc = new VariableDescriptor.Builder(entry.getKey().toString())
+            System.getProperties().forEach((key, value) -> {
+                final VariableDescriptor desc = new VariableDescriptor.Builder(key.toString())
                         .description("System Property")
                         .sensitive(false)
                         .build();
-                map.put(desc, entry.getValue().toString());
+                map.put(desc, value.toString());
             });
 
         }

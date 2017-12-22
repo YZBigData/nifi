@@ -29,7 +29,7 @@ import java.lang.annotation.Inherited;
 /**
  * <p>
  * Marker interface that a Processor can use to configure default settings for the schedule strategy, the period and the number of concurrent tasks.
- * Marker interface that a ReportingTask can use to configure default settings the  schedule strategy and the period.
+ * Marker interface that a ReportingTask can use to configure default settings the schedule strategy and the period.
  * Note that the number of Concurrent tasks will be ignored if the annotation @TriggerSerialy is used
  * </p>
  */
@@ -39,7 +39,7 @@ import java.lang.annotation.Inherited;
 @Inherited
 public @interface DefaultSchedule {
 
-    SchedulingStrategy strategy() default  SchedulingStrategy.TIMER_DRIVEN;
+    SchedulingStrategy strategy() default SchedulingStrategy.TIMER_DRIVEN;
     String period() default "0 sec";
     int concurrentTasks() default 1;
 
